@@ -74,7 +74,7 @@
 
 # **Import Library dan Membaca Data**
 
-# In[81]:
+# In[1]:
 
 
 # Import library
@@ -110,7 +110,7 @@ df.head()
 
 # **Duplikat DataFrame untuk Modeling**
 
-# In[82]:
+# In[2]:
 
 
 # Duplikat dari DataFrame asli untuk modeling
@@ -144,7 +144,7 @@ df_model_desc
 
 # **Penanganan Missing Value dan Pembersihan Data**
 
-# In[83]:
+# In[3]:
 
 
 # Imputasi - mengisi nilai kosong (NaN)
@@ -176,7 +176,7 @@ print(df_model.isnull().sum())
 
 # Tidak ada Data Kosong/Missing Value (NaN) pada Dataset.
 
-# In[84]:
+# In[4]:
 
 
 # Skeweness
@@ -200,7 +200,7 @@ print(skew_table)
 #   - Model linear regression sensitif terhadap distribusi dan outlier
 #   - Model tree-based (Random Forest dan XGB) tidak mudah terpengaruh terhadap distribusi tidak normal 
 
-# In[85]:
+# In[5]:
 
 
 # Ambil kolom kategorikal
@@ -231,8 +231,8 @@ plt.show()
 # 
 # Fitur yang berpengaruh kecil terhadap harga:
 # * N_SchoolNearBy(University)
-# * N_FacilitiesNearBy(PublicOffice):
-# * N_FacilitiesNearBy(ETC):
+# * N_FacilitiesNearBy(PublicOffice)
+# * N_FacilitiesNearBy(ETC)
 # 
 # 
 # 
@@ -250,7 +250,7 @@ plt.show()
 # * Menyiapkan analisis harga yang lebih akurat
 # 
 
-# In[86]:
+# In[6]:
 
 
 # Ambil kolom kategorikal
@@ -293,7 +293,7 @@ plt.show()
 # * Membuat visualisasi heatmap yang membantu EDA
 # * Mempersiapkan data untuk machine learning
 
-# In[87]:
+# In[7]:
 
 
 # Hitung korelasi hanya untuk kolom numerik
@@ -346,7 +346,7 @@ plt.show()
 # Model tidak bisa membaca teks, sehingga fitur kategorikal harus dikonversi.
 # 
 
-# In[88]:
+# In[8]:
 
 
 # Label encoding 3 fitur kategorikal
@@ -378,7 +378,7 @@ for col, mapping in label_maps.items():
 
 # Label encoding menghasilkan label integer. Mapping disimpan untuk laporan. TimeToSubway tetap dianggap kategori (encoded only)
 
-# In[89]:
+# In[9]:
 
 
 df_model.info()
@@ -401,7 +401,7 @@ df_model.info()
 # * Tidak membuat model bias
 # 
 
-# In[90]:
+# In[10]:
 
 
 # Menentukan Fitur
@@ -435,7 +435,7 @@ for c in X.columns:
 # 
 # 
 
-# In[91]:
+# In[11]:
 
 
 # Split Data
@@ -472,7 +472,7 @@ print('Test shape:', X_test.shape)
 # 
 # Menyusun seluruh langkah preprocessing dan pemodelan Machine Learning ke dalam satu rangkaian kerja (workflow) yang rapi, otomatis, dan konsisten.
 
-# In[92]:
+# In[12]:
 
 
 # Membuat Pipeline
@@ -514,7 +514,7 @@ print ('XGBoost tersedia:', xgb_available)
 
 # Scaler digunakan untuk model berbasis jarak / linear. Tree models tidak butuh scaling.
 
-# In[93]:
+# In[13]:
 
 
 # Baseline Training
@@ -556,7 +556,7 @@ for name, model in models.items():
 # 
 # 
 
-# In[94]:
+# In[14]:
 
 
 # RandomForest param grid (moderate)
@@ -599,7 +599,7 @@ if pipe_xgb:
 # 
 # 
 
-# In[95]:
+# In[15]:
 
 
 # Evaluasi model yang telah disesuaikan pada kumpulan data uji
@@ -645,7 +645,7 @@ eval_df
 # 
 # 
 
-# In[96]:
+# In[16]:
 
 
 # Fitur importance dari model tree-based
@@ -692,6 +692,9 @@ else:
 # * Semakin baru bangunan → harga cenderung lebih tinggi.
 # 
 # Size(sqf) = 0.053
+# * Biasanya ukuran adalah faktor terbesar, tapi di dataset ini lebih kecil dari HallwayType.
+# 
+# N_Parkinglot(Basement) = 0.0466
 # * Jumlah parkir basement cukup berpengaruh terhadap prediksi harga.
 # 
 # Fitur dengan pengaruh sangat kecil (<0.005):
@@ -709,7 +712,7 @@ else:
 # * Menemukan outlier
 # 
 
-# In[97]:
+# In[17]:
 
 
 # Residuals untuk model terbaik
@@ -752,7 +755,7 @@ print("Residuals mean:", residuals.mean(), "std:", residuals.std())
 # 
 # 
 
-# In[98]:
+# In[18]:
 
 
 # Simpan Mode/Prediksi
@@ -784,7 +787,7 @@ preds_df.head()
 
 # #### **Simpan Model**
 
-# In[99]:
+# In[19]:
 
 
 # SIMPAN MODEL & ENCODER
@@ -803,7 +806,7 @@ print('Model terbaik, encoder, dan fitur berhasil disimpan!')
 
 # #### **Load Model untuk Prediksi Baru**
 
-# In[100]:
+# In[20]:
 
 
 model = joblib.load('best_daegu_model.pkl')
